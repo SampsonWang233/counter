@@ -11,13 +11,16 @@ import LogoutComponent from "./Logoutcomponent";
 import HeaderComponent from "./HeaderComponent";
 import FooterComponent from "./FooterComponent";
 import WelcomeComponent from "./WelcomeComponent";
+import TodoComponent from "./TodoComponent";
 
 class TodoApp extends Component {
     render () {
         const LoginComponentWithNavigation = withNavigation(LoginComponent);
         const WelcomeComponentWithParams = withParams(WelcomeComponent);
-        const ListtodoComponentWithParams = withParams(ListtodoComponent);
+        // const ListtodoComponentWithParams = withParams(ListtodoComponent);
         const HeaderComponentWithNavigation = withNavigation(HeaderComponent);
+        const ListTodosComponentWithNavigation = withNavigation(ListtodoComponent) 
+        const TodoComponentWithParamsAndNavigation = withParams(withNavigation(TodoComponent));
         return (
             <div children className="todoapp">
                 <Router>
@@ -28,8 +31,13 @@ class TodoApp extends Component {
                             <Route path="/welcome/:name" element={<AuthenticationRoute>
                                                                     <WelcomeComponentWithParams /> 
                                                                 </AuthenticationRoute>} />
+                            <Route path="/todos/:id" element={ 
+                                                                <AuthenticationRoute>
+                                                                    <TodoComponentWithParamsAndNavigation />
+                                                                </AuthenticationRoute>
+                                                            } />
                             <Route path="/todos" element={<AuthenticationRoute>
-                                                            <ListtodoComponentWithParams />
+                                                            <ListTodosComponentWithNavigation />
                                                         </AuthenticationRoute>} />
                             <Route path="/logout" element={<AuthenticationRoute>
                                                                 <LogoutComponent />
